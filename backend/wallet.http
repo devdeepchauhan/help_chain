@@ -1,0 +1,99 @@
+POST http://localhost:5000/api/create-wallet
+Content-Type: application/json
+
+{
+  "name": "Jash Bohare",
+  "email": "jashbohare@gmail.com",
+  "role": "Donor"
+}
+
+
+
+
+
+### Login User
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "jashbohare@gmail.com",
+  "password": "Jash"
+}
+
+
+
+
+
+### ✅ Send OTP to Email
+POST http://localhost:5000/api/send-otp
+Content-Type: application/json
+
+{
+  "email": "provoice.management@gmail.com"
+}
+
+
+
+
+
+### ✅ Verify OTP and Create Wallet
+POST http://localhost:5000/api/verify-otp
+Content-Type: application/json
+
+{
+  "name": "Jash",
+  "email": "jashbohare@gmail.com",
+  "password": "jash123",
+  "role": "NGO",
+  "otp": "761461" 
+}
+
+
+
+
+
+### Send Funds from one user to another
+POST http://localhost:5000/api/send-funds
+Content-Type: application/json
+
+{
+  "senderEmail": "jashbohare@gmail.com",
+  "senderSecret": "SBCDW6FQ73VFLM6JDVOTFUS6YXE4ZCTAFXLR55ZTJLYVWS4ILNBXB2L2",
+  "recipientPublicKey": "GCIL5BVR3CVTZ3SM62I2UDXT7K2HQQQZ3OUX7DZ5HEMGDY7TMRF53B6D",
+  "amount": "10"
+}
+
+
+
+
+
+### Get Transactions
+GET http://localhost:5000/api/transactions/GB6DDDND3AQQ2PEUUV34WU2RB2L3NEJQDS4U7U7OWWFZT2PUN7F54WOD
+
+
+
+
+
+### Send OTP
+POST http://localhost:5000/api/send-otp
+Content-Type: application/json
+
+{
+  "email": "provoice.management@gmail.com"
+}
+
+
+
+
+
+### Verify OTP & Create Wallet
+POST http://localhost:5000/api/verify-otp
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "provoice.management@gmail.com",
+  "password": "test1234",
+  "role": "Donor",
+  "otp": "467302"
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to HelpChain</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .content-wrapper {
+      background: linear-gradient(to bottom right, #10024a, #bacad6);
+      flex-grow: 1;
+      position: relative;
+    }
+
+    .blur-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 0;
+      opacity: 0.2;
+    }
+
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background: #ffffff;
+      top: -100px;
+      right: -100px;
+    }
+
+    .circle-2 {
+      width: 250px;
+      height: 250px;
+      background: #10024a;
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .floating-icon {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .geometric-shape {
+      position: absolute;
+      z-index: 1;
+      opacity: 0.15;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 150px solid rgba(255, 255, 255, 0.3);
+      top: 60%;
+      left: 20%;
+    }
+
+    .square {
+      width: 150px;
+      height: 150px;
+      background-color: rgba(255, 255, 255, 0.2);
+      top: 40%;
+      left: 70%;
+    }
+
+    .rotating-square {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background-color: rgba(255, 255, 255, 0.2);
+      top: 30%;
+      left: 50%;
+      animation: rotate 6s infinite linear;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-top: 80px;
+      position: relative;
+      padding: 0 2rem;
+    }
+
+    .hero-section h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .hero-section p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      color: white;
+    }
+
+    .feature-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin: 40px 2rem;
+      flex-wrap: wrap;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 8px;
+      flex: 1 1 30%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      min-width: 250px;
+    }
+
+    .feature-item h3 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 1.1rem;
+    }
+
+    .cta-btn {
+      background-color: white;
+      color: #10024a;
+      padding: 18px 50px;
+      font-size: 1.25rem;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: all 0.3s ease-in-out;
+      margin-top: 20px;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background-color: #10024a;
+      color: white;
+      font-size: 1.1rem;
+      width: 100%;
+    }
+
+    footer hr {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin: 30px auto;
+      width: 50%;
+    }
+
+    @media screen and (max-width: 768px) {
+      .feature-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-item {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col relative text-white">
+  <!-- Content Wrapper with Gradient Background -->
+  <div class="content-wrapper">
+    <!-- Background Blur Circles -->
+    <div class="blur-circle circle-1"></div>
+    <div class="blur-circle circle-2"></div>
+
+    <!-- Geometric Shapes -->
+    <div class="geometric-shape triangle"></div>
+    <div class="geometric-shape square"></div>
+    <div class="geometric-shape rotating-square"></div>
+
+    <!-- Main Content -->
+    <div class="flex-grow flex flex-col">
+      <!-- Header with Logo -->
+      <header class="relative z-10 flex justify-center items-center mt-12">
+        <div class="relative text-white text-6xl font-bold border-b-4 border-white px-6 pb-2">
+          HelpChain
+          <span class="absolute -top-3 -left-6 text-white text-lg">★</span>
+          <span class="absolute -top-5 left-1/2 transform -translate-x-1/2 text-white text-sm">✦</span>
+          <span class="absolute -top-3 -right-6 text-white text-lg">★</span>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <h1>Bringing Transparency & Trust to Donations</h1>
+        <p>Track how your donations are used — real-time, secure, and decentralized with Stellar.</p>
+      </section>
+
+      <!-- Features Section -->
+      <section class="feature-container">
+        <div class="feature-item">
+          <h3>✅ Verified NGOs</h3>
+          <p>Support organizations vetted for transparency and impact.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🔄 Live Donations</h3>
+          <p>See real-time updates on where the funds are flowing.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🔐 Secured by Blockchain</h3>
+          <p>Stellar-based smart tracking ensures every donation is accounted for.</p>
+        </div>
+      </section>
+
+      <!-- CTA Button -->
+      <section class="text-center pb-12">
+        <a href="signup.html" class="cta-btn">Get Started</a>
+      </section>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Made with 💙 on <span class="font-semibold">Stellar</span> by
+      <span class="font-bold">PseudoCoders</span>
+    </p>
+  </footer>
+
+</body>
+
+</html>

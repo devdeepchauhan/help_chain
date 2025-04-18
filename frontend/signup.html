@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HelpChain - Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h1>Join HelpChain</h1>
+      <p>
+        Empowering transparent donations using blockchain. Sign up to support or receive support with trust.
+      </p>
+    </div>
+
+    <div class="right-panel">
+      <h2>Create an Account</h2>
+
+      <input type="text" id="name" placeholder="Name or Username" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Create Password" required />
+      
+      <select id="role">
+        <option value="">Select Role</option>
+        <option value="Donor">Donor</option>
+        <option value="NGO">NGO</option>
+      </select>
+
+      <button id="sendOtpBtn">Send OTP</button>
+      <input type="text" id="otp" placeholder="Enter OTP" style="display:none;" />
+      <button id="verifyOtpBtn" style="display:none;">Verify OTP</button>
+
+      <button id="createWalletBtn" style="display:none;">Get Keys!</button>
+      <div id="keys" class="key-display"></div>
+
+      <button id="copyKeysBtn" style="display:none;">Copy Keys</button>
+
+      <button id="finalSignUpBtn" style="display:none;">Sign Up</button>
+
+      <p class="nav-text">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </div>
+
+  <!-- Toastify JS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script>
+    let otpVerified = false;
+    let keysGenerated = false;
+    let userDetails = {};
+
+    const msg = (text, color = "black") => {
+      Toastify({
+        text: text,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: color,
+        stopOnFocus: true,
+        close: true
+      }).showToast();
+    };
+
+    document.getElementById("sendOtpBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      if (!email) return msg("❌ Please enter your email.", "red");
+
+      try {
+        const res = await fetch("http://localhost:5000/api/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          msg(data.message, "green");
+          document.getElementById("otp").style.display = "inline-block";
+          document.getElementById("verifyOtpBtn").style.display = "inline-block";
+          document.getElementById("sendOtpBtn").style.display = "none";
+        } else {
+          msg(`❌ ${data.error}`, "red");
+        }
+      } catch (err) {
+        msg("❌ Failed to send OTP. Check connection.", "red");
+      }
+    });
+
+    document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+      const otp = document.getElementById("otp").value.trim();
+
+      if (!name || !email || !password || !role || !otp)
+        return msg("❌ Fill all fields including OTP.", "red");
+
+      userDetails = { name, email, password, role, otp };
+
+      try {
+        const res = await fetch("http://localhost:5000/api/verify-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userDetails),
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          otpVerified = true;
+          msg("✅ OTP Verified!", "green");
+          document.getElementById("createWalletBtn").style.display = "inline-block";
+          document.getElementById("otp").style.display = "none";
+          document.getElementById("verifyOtpBtn").style.display = "none";
+
+          userDetails.publicKey = data.publicKey;
+          userDetails.secretKey = data.secretKey;
+        } else {
+          msg(`❌ ${data.error}`, "red");
+        }
+      } catch (err) {
+        msg(`❌ Network error: ${err.message}`, "red");
+      }
+    });
+
+    document.getElementById("createWalletBtn").addEventListener("click", () => {
+      if (!otpVerified || !userDetails.publicKey || !userDetails.secretKey) {
+        return msg("❌ Cannot generate wallet. Verify OTP first.", "red");
+      }
+
+      keysGenerated = true;
+      document.getElementById("keys").innerText =
+        `My Public Key: ${userDetails.publicKey}\n\nMy Secret Key: ${userDetails.secretKey}\n\n⚠️ Please store these keys securely.`;
+      msg("✅ Wallet created successfully!", "green");
+
+      document.getElementById("finalSignUpBtn").style.display = "inline-block";
+      document.getElementById("copyKeysBtn").style.display = "inline-block";
+    });
+
+    document.getElementById("copyKeysBtn").addEventListener("click", () => {
+      const keysText = document.getElementById("keys").innerText;
+      navigator.clipboard.writeText(keysText)
+        .then(() => msg("✅ Keys copied to clipboard!", "green"))
+        .catch(() => msg("❌ Failed to copy keys.", "red"));
+    });
+
+    document.getElementById("finalSignUpBtn").addEventListener("click", () => {
+      if (!otpVerified || !keysGenerated) {
+        msg("❌ Please complete all steps before signing up.", "red");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(userDetails));
+      window.location.href = "landing.html";
+    });
+  </script>
+</body>
+</html>

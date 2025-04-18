@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HelpChain Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-[#10024a] to-[#bacad6] font-poppins">
+
+  <main class="flex-1 px-6 py-8 max-w-7xl mx-auto w-full">
+    <div class="grid lg:grid-cols-3 gap-8 items-start">
+
+      <!-- Left Column (Brand + Wallet) -->
+      <div class="space-y-8">
+
+        <!-- Brand Card -->
+        <div
+          class="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl flex flex-col justify-between min-h-[420px]">
+          <div class="space-y-4">
+            <h1 class="text-3xl font-black text-transparent bg-gradient-to-r from-[#10024a] to-[#10024a] bg-clip-text">
+              HelpChain</h1>
+            <p class="text-[#140547] text-xl leading-relaxed">HelpChain is a blockchain-based donation platform that
+              enables secure, transparent fund transfers to NGOs using Stellar and Firebase.</p>
+          </div>
+          <div class="mt-8 flex flex-col space-y-3">
+            <a href="transactions.html"
+              class="px-6 py-2 bg-white text-[#10024a] rounded-full text-sm font-bold shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 text-center">
+              See Transaction History
+            </a>
+            <button id="logoutBtn"
+              class="px-6 py-2 bg-white text-[#10024a] rounded-full text-sm font-bold shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Wallet Card -->
+        <div
+          class="relative bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl hover:transform hover:scale-[1.02] transition-all duration-300 min-h-[257px] flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start">
+              <div class="space-y-2">
+                <h3 class="text-lg font-bold text-gray-800">Wallet Balance</h3>
+                <div class="text-2xl font-black text-[#10024a]">
+                  <span id="walletBalance">--</span> <span class="text-lg">XLM</span>
+                </div>
+              </div>
+              <div class="w-10 h-10 bg-[#10024a] rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="h-1 bg-gradient-to-r from-[#10024a] to-[#bacad6] rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Inspiring Quote -->
+          <div class="pt-6 text-center text-sm italic text-gray-600">
+            “In code we trust, through blocks we connect — building a transparent future, one transaction at a time.”
+            <br />
+            <br />
+            <span class="not-italic font-medium text-[#10024a]">–Made with 💙 on Stellar by PseudoCoders</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- User Profile -->
+        <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-2xl font-black text-gray-800">👾 <span id="userName">Anonymous</span></h2>
+              <p class="text-sm text-gray-500">Stellar Network Participant</p>
+            </div>
+            <div class="relative">
+              <div class="w-12 h-12 bg-[#10024a] rounded-xl flex items-center justify-center">
+                <span class="text-2xl">👽</span>
+              </div>
+              <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-full border-2 border-white"></div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div
+              class="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 hover:border-[#10024a] transition-all duration-300">
+              <div>
+                <p class="text-sm font-medium text-gray-500">ACCOUNT ROLE</p>
+                <p class="font-mono text-sm text-gray-700 break-all"><span id="userRole">🔄 Loading...</span></p>
+              </div>
+              <div>
+                <p class="text-xs font-medium text-gray-500">NETWORK</p>
+                <p class="font-medium text-[#bacad6]">STELLAR TESTNET</p>
+              </div>
+            </div>
+
+            <div class="relative group">
+              <div
+                class="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 hover:border-[#10024a] transition-all duration-300">
+                <div>
+                  <p class="text-sm font-medium text-gray-500">PUBLIC KEY</p>
+                  <p id="publicKey" class="font-mono text-sm text-gray-700 break-all">
+                    G.......................................................................................</p>
+                </div>
+                <button id="copyBtn"
+                  class="ml-4 px-3 py-2 bg-[#10024a] hover:bg-[#bacad6] text-white rounded-full transition-all duration-200">
+                  <span class="text-white">📋</span>
+                </button>
+              </div>
+              <div id="copyTooltip"
+                class="absolute right-2 -top-8 bg-gray-800 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                Copy to clipboard</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transaction Form -->
+        <div class="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
+          <div class="space-y-2">
+            <h3
+              class="text-2xl font-black text-transparent bg-gradient-to-r from-[#10024a] to-[#10024a] bg-clip-text">
+              Instant Transfer</h3>
+            <form id="sendForm" class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Recipient Address</label>
+                <input type="text" id="recipient"
+                  class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#10024a] focus:border-transparent transition-all"
+                  placeholder="GABCD1234...">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Amount (XLM)</label>
+                <input type="number" id="amount"
+                  class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#10024a] focus:border-transparent transition-all"
+                  placeholder="0.00">
+              </div>
+              <button type="submit"
+                class="w-full py-4 bg-white text-[#10024a] font-bold rounded-3xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95">
+                Send Funds
+              </button>
+            </form>
+            <div id="sendStatus" class="text-center text-sm font-medium space-y-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/10.4.0/stellar-sdk.min.js"></script>
+  <script src="landing.js"></script>
+
+  <!-- Logout Button Logic -->
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      // Perform any logout operations (e.g., clearing session or token)
+
+      // Redirect to login page
+      window.location.href = "login.html";  // This will redirect the user to login.html
+    });
+  </script>
+</body>
+
+</html>

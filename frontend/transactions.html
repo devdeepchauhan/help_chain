@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style="overflow-x: hidden;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transaction History - HelpChain</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #10024a, #bacad6);
+      min-height: 100vh;
+    }
+
+    .left-card {
+      background: linear-gradient(135deg, #E0E0E0, #E0E0E0);
+      color: #140547;
+    }
+
+    .left-card a,
+    .left-card button {
+      background: white;
+      color: #140547;
+    }
+
+    .left-card a:hover,
+    .left-card button:hover {
+      opacity: 0.9;
+    }
+
+    .right-card {
+      background: #E0E0E0;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background-color: #E0E0E0;
+      z-index: 10;
+      padding-bottom: 12px;
+      padding-top: 4px;
+    }
+
+    #transactionList {
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-right: 4px;
+    }
+
+    #transactionList::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #transactionList::-webkit-scrollbar-thumb {
+      background-color: #140547;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        padding: 0;
+        height: auto;
+        min-height: 100vh;
+        gap: 16px;
+      }
+
+      .left-column, .right-column {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .left-card, .right-card {
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        min-height: auto !important;
+      }
+
+      .left-card, .right-card {
+        padding: 1.5rem !important;
+      }
+
+      .sticky-header {
+        position: static;
+        padding: 0.75rem 0;
+      }
+
+      #transactionList {
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      .left-card {
+        margin-bottom: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .left-card, .right-card {
+        padding: 1rem !important;
+      }
+
+      h1 {
+        font-size: 1.5rem !important;
+      }
+
+      h3 {
+        font-size: 1.25rem !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden w-full max-w-full">
+
+  <main class="flex flex-col md:flex-row h-auto md:h-screen w-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-8 gap-4 md:gap-6">
+    <!-- Left Column -->
+    <div class="w-full md:w-1/3 left-column">
+      <div class="sticky top-0 md:top-8">
+        <div class="left-card rounded-lg md:rounded-2xl p-6 md:p-8 shadow-md md:shadow-2xl flex flex-col justify-between min-h-[300px] md:min-h-[420px]">
+          <div class="space-y-4">
+            <h1 class="text-2xl md:text-3xl font-black">HelpChain</h1>
+            <p class="text-base md:text-lg leading-relaxed">
+              Track all your Stellar-based donation transactions with full transparency and real-time updates.
+            </p>
+          </div>
+          <div class="mt-6 md:mt-8 flex flex-col space-y-3">
+            <a href="landing.html"
+               class="px-6 py-2 bg-gradient-to-r from-[#140547] to-[#bacad6] text-white rounded-full text-sm font-semibold shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 text-center">
+              Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="w-full md:w-2/3 h-auto md:h-full right-column mt-4 md:mt-0">
+      <div class="right-card rounded-lg md:rounded-2xl p-6 md:p-8 shadow-md md:shadow-2xl h-auto md:h-full">
+        <div class="sticky-header">
+          <h3 class="text-xl md:text-2xl font-black text-[#140547]">
+            📜 Transaction History
+          </h3>
+        </div>
+        <div id="transactionList" class="space-y-4">
+          <!-- Example transaction with truncation -->
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <p class="text-sm font-semibold text-[#140547]">From:</p>
+            <p class="truncate w-full text-sm font-mono bg-gray-100 text-[#140547] px-2 py-1 rounded" title="GCFK3REALLYLONGKEYEXAMPLEPUBLICKEY1234567890ABCDEFGHIJ">
+              GCFK3REALLYLONGKEYEXAMPLEPUBLICKEY1234567890ABCDEFGHIJ
+            </p>
+            <p class="text-sm font-semibold text-[#140547] mt-2">To:</p>
+            <p class="truncate w-full text-sm font-mono bg-gray-100 text-[#140547] px-2 py-1 rounded" title="GDFW3REALLYLONGKEYEXAMPLEPUBLICKEY1234567890ABCDEFGHIJ">
+              GDFW3REALLYLONGKEYEXAMPLEPUBLICKEY1234567890ABCDEFGHIJ
+            </p>
+            <p class="mt-2 text-sm text-gray-700">💸 Amount: 50 XLM</p>
+            <p class="text-xs text-gray-500">🕒 2025-04-18 12:34:56</p>
+          </div>
+          <!-- More transactions will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/10.4.0/stellar-sdk.min.js"></script>
+  <script src="transactions.js"></script>
+</body>
+</html>
